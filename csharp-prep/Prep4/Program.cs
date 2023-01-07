@@ -30,6 +30,9 @@ class Program
         Console.WriteLine($"The average is {average}");
         int max = inputNumberList.Max();
         Console.WriteLine($"The largest number is {max}");
-
+        int min = inputNumberList.Min();
+        Console.WriteLine($"The smallest number is {min}");
+        inputNumberList.Sort();
+        Console.WriteLine(string.Join(",", inputNumberList));
     }
 }
