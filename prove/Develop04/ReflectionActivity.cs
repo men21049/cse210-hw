@@ -17,13 +17,14 @@ class ReflectionActivity : Activity
                                                 ,"How can you keep this experience in mind in the future?"};
 
     string description = "This activity will help you reflect on times in your life when you have shown strength and resilience. This will help you recognize the power you have and how you can use it in other aspects of your life.";
-    public ReflectionActivity(string _activityName, string _description, List<string> activityList) : base(_activityName)
+    public ReflectionActivity(string _activityName) : base(_activityName)
     {
         SetDescription(description);
         SetActivityList(activityList);
     }
 
-    public List<string> getQuestionList(){
+    public List<string> getQuestionList()
+    {
         return QuestionList;
     }
 }
