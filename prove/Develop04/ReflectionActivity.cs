@@ -1,7 +1,10 @@
 using System;
+using System.Collections.Generic;
+using static System.Linq.Enumerable;
 
 class ReflectionActivity : Activity
 {
+    private int numberOfSecondsTothink;
     List<string> activityList = new List<string> { "Think of a time when you stood up for someone else."
                                                 ,"Think of a time when you did something really difficult."
                                                 ,"Think of a time when you helped someone in need."
@@ -23,8 +26,47 @@ class ReflectionActivity : Activity
         SetActivityList(activityList);
     }
 
+    public void setNumberOfSecondsToThink(int numSecondsToRun)
+    {
+        numberOfSecondsTothink = numSecondsToRun / 5;
+    }
+
+    public int getNumberOfSecondsToThink()
+    {
+        return numberOfSecondsTothink;
+    }
     public List<string> getQuestionList()
     {
         return QuestionList;
     }
+
+    public void getRandomReflectionActivity()
+    {
+        Random random = new Random();
+        int index = random.Next(activityList.Count);
+        Console.WriteLine("Consider the following prompt:");
+        Thread.Sleep(200);
+        Console.WriteLine($"---{activityList[index]}---");
+        Thread.Sleep(500);
+        Console.WriteLine("Now ponder on each of the following questions as they related to this experience");
+        Thread.Sleep(200);
+    }
+
+    public List<string> getRandomReflectionQuestionActivity()
+    {
+        int numberOfIndexes = numberOfSecondsTothink;
+        Random random = new Random();
+        List<string> list = new List<string>();
+        foreach (int i in Range(1, QuestionList.Count))
+        {
+            int index = random.Next(QuestionList.Count);
+            if (!list.Contains(QuestionList[index]) & list.Count <= numberOfIndexes)
+            {
+                list.Add(QuestionList[index]);
+            }
+
+        }
+        return list;
+    }
+
 }

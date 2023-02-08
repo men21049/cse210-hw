@@ -60,7 +60,7 @@ class Activity
     public void FinishActivity(int numSecondsToRun, string _activityName)
     {
         Console.WriteLine("Well Done!!");
-        Console.WriteLine($"Ÿou have completed another {numSecondsToRun} seconds of the {_activityName}");
+        Console.WriteLine($"Ÿou have completed another {numSecondsToRun} seconds of the {_activityName} Activity");
     }
 
     public string getActivityName()

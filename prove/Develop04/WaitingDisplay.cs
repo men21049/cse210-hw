@@ -6,9 +6,20 @@ class WaitingDisplay
 {
     int spinnerCounter = 0;
 
-    public WaitingDisplay()
+    public List<string> GetMultipleLinesWithTimer(int numSecondsToRun)
     {
-
+        Stopwatch stopWatch = new Stopwatch();
+        stopWatch.Start();
+        List<string> list = new List<string>();
+        while (stopWatch.ElapsedMilliseconds / 1000 < numSecondsToRun)
+        {
+            Console.Write(">");
+            string line = Console.ReadLine();
+            list.Add(line);
+        }
+        Console.Write("");
+        Console.WriteLine("");
+        return list;
     }
 
     public void displaySpinner(int numSecondsToRun)
@@ -32,18 +43,48 @@ class WaitingDisplay
         Console.WriteLine("");
     }
 
-    public void displayCountDown(int numSecondsToRun, List<string> list)
+    public void displaySpinnerWithText(List<string> list, int numSecondsToRun)
     {
         foreach (string item in list)
         {
+            Console.Write($"{item}");
+            displaySpinner(numSecondsToRun);
+        }
+
+    }
+
+    public void displayCountDown(int numSecondsToRun, int totalActivity, List<string> list = default(List<string>), string text = "")
+    {
+        if (list?.Any() == true)
+        {
+            while (totalActivity > numSecondsToRun)
+            {
+                foreach (string item in list)
+                {
+                    for (int i = numSecondsToRun; i >= 1; i--)
+                    {
+                        Console.Write($"{item}...{i}");
+                        Console.SetCursorPosition(0, Console.CursorTop);
+                        Thread.Sleep(1000);
+                    }
+                    Console.Write("");
+                    Console.WriteLine("");
+                    totalActivity = totalActivity - numSecondsToRun;
+                }
+            }
+            Thread.Sleep(200);
+        }
+        else
+        {
             for (int i = numSecondsToRun; i >= 1; i--)
             {
-                Console.Write($"{item}...{i}");
+                Console.Write($"{text} {i}");
                 Console.SetCursorPosition(0, Console.CursorTop);
                 Thread.Sleep(1000);
             }
+            Console.Write("");
             Console.WriteLine("");
+            Thread.Sleep(200);
         }
-
     }
 }
